@@ -1,0 +1,18 @@
+.bill {
+    padding: 10px;
+
+    .user-list {
+        .user {
+            display: inline-block;
+            width: 100px;
+            background: green;
+            padding: 10px;
+            border-radius: 5px;
+            margin-right: 10px;
+            margin-bottom: 10px;
+            span {
+                float: right;
+            }
+        }
+    }
+}
