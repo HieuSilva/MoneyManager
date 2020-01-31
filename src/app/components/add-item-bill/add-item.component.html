@@ -1,0 +1,21 @@
+<ion-header translucent>
+    <ion-toolbar>
+        <ion-title>Add Item</ion-title>
+        <ion-buttons slot="end">
+            <ion-button (click)="dismissDialog()">Close</ion-button>
+        </ion-buttons>
+    </ion-toolbar>
+</ion-header>
+<ion-content fullscreen>
+    <div class='add-item'>
+        <div class="user-list">
+            <div *ngFor='let u of users; let i = index;' 
+                style='display: inline-block;' class='user'>
+                {{u.name}}
+            </div>
+        </div>
+        <ion-item>
+            
+        </ion-item>
+    </div>
+</ion-content>

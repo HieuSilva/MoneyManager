@@ -22,6 +22,9 @@ import { AddItemComponent } from '../add-item-bill/add-item.component';
         LandingPageComponent,
         BillComponent,
         AddItemComponent
+    ],
+    entryComponents: [
+        AddItemComponent
     ]
 })
 export class LandingPageModule {

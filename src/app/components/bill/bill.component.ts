@@ -4,6 +4,8 @@ import { User } from 'src/app/models/User';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { UserPayment } from 'src/app/models/UserPayment';
 import { ModalController } from '@ionic/angular';
+import { AddItemComponent } from '../add-item-bill/add-item.component';
+import { ItemBill } from 'src/app/models/ItemBill';
 
 @Component({
     selector:'app-bill',
@@ -17,6 +19,7 @@ export class BillComponent implements OnInit{
     form: FormGroup;
     isCreatingBill = false;
     userPayments: UserPayment[] = [];
+    items: ItemBill[] = [];
 
     constructor(private modalController: ModalController) {
         
@@ -70,6 +73,17 @@ export class BillComponent implements OnInit{
     }
 
     onAddItems() {
+        this.openAddItemDialog()
+    }
 
+    async openAddItemDialog() {
+        let dialog = await this.modalController.create({
+            component: AddItemComponent,
+            componentProps: {
+                currentItemTotal: this.items.length,
+                users: this.users,
+            }
+        });
+        dialog.present();
     }
 }
