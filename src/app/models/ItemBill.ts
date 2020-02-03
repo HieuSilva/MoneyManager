@@ -4,9 +4,10 @@ import { Item } from './Item';
 
 export class ItemBill {
     id: number;
-    user: User;
+    users: User[];
     bill: Bill;
     item: Item;
     quantity: number;
+    itemType: string; //'single' or 'share'
     price: number;
 }

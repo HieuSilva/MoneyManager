@@ -6,6 +6,9 @@ import { LandingPageComponent } from './landing-page.component';
 import { IonicModule } from '@ionic/angular';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AddItemComponent } from '../add-item-bill/add-item.component';
+import { UserService } from 'src/app/services/user.service';
+import { BillService } from 'src/app/services/bill.service';
+import { PaymentComponent } from '../payment/payment.component';
 
 @NgModule({
     imports: [
@@ -21,10 +24,16 @@ import { AddItemComponent } from '../add-item-bill/add-item.component';
     declarations: [
         LandingPageComponent,
         BillComponent,
-        AddItemComponent
+        AddItemComponent,
+        PaymentComponent
     ],
     entryComponents: [
-        AddItemComponent
+        AddItemComponent,
+        PaymentComponent
+    ],
+    providers: [
+        UserService,
+        BillService
     ]
 })
 export class LandingPageModule {

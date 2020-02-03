@@ -2,8 +2,8 @@
     <form [formGroup]='form'>
         <ion-button expand='block' *ngIf='!isCreatingBill && !bill' (click)='onAddBill()'>Add bill</ion-button>
         <div class="bill-info" *ngIf='!!bill'>
-            <div>{{bill.description}}</div>
-            <div>{{bill.dateCreated | date}}</div>
+            <div>Bill description: {{bill.description}}</div>
+            <div>Created date: {{bill.dateCreated | date}}</div>
         </div>
         <div class='add-bill' *ngIf='isCreatingBill'>
             <ion-item>
@@ -22,8 +22,7 @@
         <div *ngIf='!!bill'>
             <h3>Users involved to this bill</h3>
             <div class="user-list">
-                <div *ngFor='let u of users; let i = index;' 
-                    style='display: inline-block;' class='user'>
+                <div *ngFor='let u of users; let i = index;' style='display: inline-block;' class='user'>
                     {{u.name}}
                     <span (click)='onRemoveUser(i)'>X</span>
                 </div>
@@ -38,7 +37,33 @@
         </div>
         <div class='item-list' *ngIf='!!bill'>
             <h3>Item list</h3>
-            <ion-button (click)=onAddItems()>Add</ion-button>
+            <div *ngFor='let item of items; let i = index;' class='item'>
+                <div class='col-7'>
+                    {{i+1}}. {{item.item.name}} - {{item.quantity}} ({{item.users.length}})
+                </div>
+                <div class='col-3'>
+                    <ion-icon name="trash" style='margin-right: 30px; color:rgb(240, 65, 65);'
+                        (click)='onRemoveItem(i)'></ion-icon>
+                    <ion-icon name="build"
+                        (click)='onEditItem(i)'></ion-icon>
+                </div>
+            </div>
+            <ion-item class='half-width'>
+                <ion-label position="stacked">Item name</ion-label>
+                <ion-input formControlName='ItemName'></ion-input>
+            </ion-item>
+            <ion-item class='half-width'>
+                <ion-label position="stacked">Item price</ion-label>
+                <ion-input type='number' formControlName='ItemPrice'></ion-input>
+            </ion-item>
+            <ion-button (click)='onAddItem()' style='float: right;'>Add</ion-button>
+            <!-- <ion-button (click)=onAddItems()>Add</ion-button> -->
+            <div>
+                <ion-button expand='block' style='clear: both;margin-top: 80px;'>
+                    Checkout Info
+                    <ion-icon name="arrow-forward"></ion-icon> 
+                </ion-button>
+            </div>
         </div>
     </form>
 </div>

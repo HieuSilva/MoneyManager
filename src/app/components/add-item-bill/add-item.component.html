@@ -1,21 +1,72 @@
 <ion-header translucent>
     <ion-toolbar>
-        <ion-title>Add Item</ion-title>
-        <ion-buttons slot="end">
+        <ion-title>Edit Item</ion-title>
+        <ion-buttons slot="start">
             <ion-button (click)="dismissDialog()">Close</ion-button>
+        </ion-buttons>
+        <ion-buttons slot="end">
+            <ion-button (click)="onSave()">Save</ion-button>
         </ion-buttons>
     </ion-toolbar>
 </ion-header>
 <ion-content fullscreen>
     <div class='add-item'>
-        <div class="user-list">
-            <div *ngFor='let u of users; let i = index;' 
-                style='display: inline-block;' class='user'>
-                {{u.name}}
+        <form [formGroup]='form'>
+
+            <div>
+                <ion-item>
+                    <ion-label position="stacked">Item name</ion-label>
+                    <ion-input formControlName='ItemName'></ion-input>
+                </ion-item>
+                <ion-item class='half-width'>
+                    <ion-label position="stacked">Item price</ion-label>
+                    <ion-input type='number' formControlName='ItemPrice'></ion-input>
+                </ion-item>
+                <ion-item class='half-width'>
+                    <ion-label position="stacked">Quantity</ion-label>
+                    <ion-input type='number' formControlName='Quantity'></ion-input>
+                </ion-item>
             </div>
-        </div>
-        <ion-item>
+            <div>
+                <ion-list>
+                    <ion-radio-group>
+                        <ion-list-header>
+                            <ion-label>Item type</ion-label>
+                        </ion-list-header>
+                        <ion-item>
+                            <ion-label>Share</ion-label>
+                            <ion-radio slot="start" value="share" (ionSelect)='setTypeShare()' [checked]='itemShared'>
+                            </ion-radio>
+                        </ion-item>
+                        <ion-item>
+                            <ion-label>Single</ion-label>
+                            <ion-radio slot="start" value="single" (ionSelect)='setTypeSingle()'
+                                [checked]='!itemShared'></ion-radio>
+                        </ion-item>
+                    </ion-radio-group>
+                </ion-list>
+            </div>
+            <div class="user-list" *ngIf='itemShared'>
+                <div>
+                    <h3 class='half-width' style='margin-top: 0;'>Share to users</h3>
+                    <span (click)='resetUsers()' style='float: right;'>Reset</span>
+                </div>
+
+                <div *ngFor='let u of users; let i = index;' style='display: inline-block;' class='user'>
+                    {{u.name}}
+                    <span (click)='onRemoveUser(i)'>X</span>
+                </div>
+            </div>
+            <div *ngIf='!itemShared'>
+                <ion-item>
+                    <ion-label>Bought by user</ion-label>
+                    <ion-select [value]="item.users.length > 0 ? item.users[0].id : ''" okText="OK" cancelText="Dismiss" (ionChange)='onUserSelect($event)'>
+                        <ion-select-option *ngFor='let u of users' [value]="u.id">{{u.name}}</ion-select-option>
+                    </ion-select>
+                </ion-item>
+            </div>
             
-        </ion-item>
+        </form>
+
     </div>
 </ion-content>

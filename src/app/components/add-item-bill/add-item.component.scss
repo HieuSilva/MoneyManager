@@ -1,3 +1,21 @@
 .add-item {
     padding: 10px;
+    .user-list {
+        .user {
+            display: inline-block;
+            width: 100px;
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid rgb(56, 128, 255);
+            margin-right: 10px;
+            margin-bottom: 10px;
+            span {
+                float: right;
+            }
+        }
+    }
+    .half-width {
+        display: inline-block;
+        width: 50%;
+    }
 }
