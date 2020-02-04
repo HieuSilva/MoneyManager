@@ -2,6 +2,17 @@
     padding: 10px;
     overflow: auto;
     height: 100%;
+    .bill-info {
+        background-color: rgba(0,0,0,0.1);
+        border-radius: 5px;
+        padding: 0 10px;
+        .bill-desc {
+            padding: 10px 0;
+            font-weight: 600;
+            font-size: 18px;
+        }
+    }
+
     .user-list {
         .user {
             display: inline-block;
@@ -19,6 +30,7 @@
 
     .item-list {
         clear: both;
+        padding: 20px 0;
         .item {
             margin-bottom: 15px;
             ion-icon {
@@ -40,5 +52,8 @@
     .col-3 {
         display: inline-block;
         width: 30%;
+    }
+    h3 {
+        font-weight: bold;
     }
 }

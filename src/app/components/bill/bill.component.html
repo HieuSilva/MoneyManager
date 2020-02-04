@@ -1,9 +1,10 @@
 <div class="bill">
     <form [formGroup]='form'>
-        <ion-button expand='block' *ngIf='!isCreatingBill && !bill' (click)='onAddBill()'>Add bill</ion-button>
+        <ion-button expand='block' *ngIf='!isCreatingBill && !bill' color='success'
+            (click)='onAddBill()'>ADD BILL</ion-button>
         <div class="bill-info" *ngIf='!!bill'>
-            <div>Bill description: {{bill.description}}</div>
-            <div>Created date: {{bill.dateCreated | date}}</div>
+            <div class='bill-desc'>Bill description: {{bill.description}}</div>
+            <div class='bill-desc'>Created date: {{bill.dateCreated | date}}</div>
         </div>
         <div class='add-bill' *ngIf='isCreatingBill'>
             <ion-item>
@@ -16,10 +17,11 @@
                     value="2002-09-23T15:03:46.789">
                 </ion-datetime>
             </ion-item>
-            <ion-button expand='block' (click)='onCreateBill()'>OK</ion-button>
+            <ion-button style='margin-top: 20px;' color='success' expand='block' 
+                (click)='onCreateBill()'>OK</ion-button>
             <ion-button expand='block' color="danger" (click)='onDeleteBill()'>Cancel</ion-button>
         </div>
-        <div *ngIf='!!bill'>
+        <div *ngIf='!!bill' style='padding: 20px 0;'>
             <h3>Users involved to this bill</h3>
             <div class="user-list">
                 <div *ngFor='let u of users; let i = index;' style='display: inline-block;' class='user'>
@@ -32,7 +34,7 @@
                     <ion-label position="stacked">User name</ion-label>
                     <ion-input formControlName='UserName'></ion-input>
                 </ion-item>
-                <ion-button style='float: right;' (click)=onAddUser()>Add</ion-button>
+                <ion-button style='float: right;' color='success' (click)=onAddUser()>Add</ion-button>
             </div>
         </div>
         <div class='item-list' *ngIf='!!bill'>
@@ -59,7 +61,7 @@
                 <ion-label position="stacked">Item price</ion-label>
                 <ion-input type='number' formControlName='ItemPrice'></ion-input>
             </ion-item>
-            <ion-button (click)='onAddItem()' style='float: right;'>Add</ion-button>
+            <ion-button (click)='onAddItem()' color='success' style='float: right;'>Add</ion-button>
             <!-- <ion-button (click)=onAddItems()>Add</ion-button> -->
             <div>
                 <ion-button (click)='openPaymentDialog()' expand='block' style='clear: both;margin-top: 80px;'>

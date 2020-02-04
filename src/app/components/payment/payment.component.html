@@ -41,16 +41,16 @@
                     <ion-label position="stacked">Item price</ion-label>
                     <ion-input type='number' formControlName='Amount'></ion-input>
                 </ion-item>
-                <ion-button (click)='onAddPayment()' style='float: right;'>Add</ion-button>
+                <ion-button (click)='onAddPayment()' color='success' style='float: right;'>Add</ion-button>
             </div>
 
             <div *ngIf='payments.length > 0' style='clear: both;padding: 10px 0;'>
-                <ion-button expand='block' (click)='calculateBill()'>Calculate</ion-button>
+                <ion-button expand='block' color='dark' (click)='calculateBill()'>Calculate</ion-button>
             </div>
 
             <div *ngIf='transfers.length > 0'>
-                Transfers: 
-                <div *ngFor='let t of transfers; let i = index;' style='padding: 10px 0;'>
+                <h3>Transfers</h3> 
+                <div *ngFor='let t of transfers; let i = index;' class='transfer'>
                     {{i + 1}}. {{t.fromUser.name}} -----> {{t.toUser.name}} : {{t.amount}}
                 </div>
             </div>

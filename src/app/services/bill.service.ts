@@ -66,10 +66,12 @@ export class BillService {
 
         let payBackUser = payDifferences.filter(d => d.difference < 0);
         let receivePayBackUser = payDifferences.filter(d => d.difference > 0);
+        let receiveTotal = 0;
+        receivePayBackUser.forEach(d => {receiveTotal += d.difference})
         payBackUser.forEach(p => {
             receivePayBackUser.forEach(r => {
                 let t = new Transfer();
-                t.amount = Math.abs(r.difference / payBackUser.length);
+                t.amount = Math.ceil(Math.abs(p.difference * r.difference / receiveTotal));
                 t.fromUser = p.user;
                 t.toUser = r.user;
                 transfers.push(t);

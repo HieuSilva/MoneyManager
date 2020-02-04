@@ -29,6 +29,12 @@
         }
     }
 
+    .transfer {
+        padding: 10px 0;
+        font-weight: 600;
+        font-size: 18px;
+    }
+    
     .half-width {
         display: inline-block;
         width: 50%;
@@ -41,5 +47,9 @@
     .col-2 {
         display: inline-block;
         width: 20%;
+    }
+
+    h3 {
+        font-weight: bold;
     }
 }
