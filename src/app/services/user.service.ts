@@ -1,9 +1,42 @@
 import { User } from '../models/User';
 import { Subject } from 'rxjs';
 
+const userList = [
+    {
+        id: 1,
+        name: 'hieu',
+        nickname: '',
+        password: null
+    },
+    {
+        id: 2,
+        name: 'binh',
+        nickname: '',
+        password: null
+    },
+    {
+        id: 3,
+        name: 'duc',
+        nickname: '',
+        password: null
+    },
+    {
+        id: 4,
+        name: 'phuc',
+        nickname: '',
+        password: null
+    },
+    {
+        id: 5,
+        name: 'trung',
+        nickname: '',
+        password: null
+    }
+]
 export class UserService {
 
-    users: User[] = [];
+    // users: User[] = [];
+    users: User[] = userList;
     usersSubject: Subject<User[]> = new Subject<User[]>();
 
     createUser(name: string) {

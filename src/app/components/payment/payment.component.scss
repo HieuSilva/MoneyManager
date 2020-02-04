@@ -1,0 +1,45 @@
+.payment {
+    padding: 10px;
+    height: 100%;
+    overflow: auto;
+    .user-list {
+        .user {
+            display: inline-block;
+            width: 100px;
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid rgb(56, 128, 255);
+            margin-right: 10px;
+            margin-bottom: 10px;
+            span {
+                float: right;
+            }
+        }
+    }
+
+    .item-list {
+        clear: both;
+        .item {
+            margin-bottom: 15px;
+            ion-icon {
+                font-size: 30px;
+                vertical-align: middle;
+               
+            }
+        }
+    }
+
+    .half-width {
+        display: inline-block;
+        width: 50%;
+    }
+
+    .col-8 {
+        display: inline-block;
+        width: 80%;
+    }
+    .col-2 {
+        display: inline-block;
+        width: 20%;
+    }
+}

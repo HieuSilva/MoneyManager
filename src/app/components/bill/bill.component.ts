@@ -9,6 +9,9 @@ import { ItemBill } from 'src/app/models/ItemBill';
 import { Item } from 'src/app/models/Item';
 import { UserService } from 'src/app/services/user.service';
 import { BillService } from 'src/app/services/bill.service';
+import { PaymentComponent } from '../payment/payment.component';
+
+
 
 @Component({
     selector:'app-bill',
@@ -23,6 +26,7 @@ export class BillComponent implements OnInit{
     isCreatingBill = false;
     userPayments: UserPayment[] = [];
     items: ItemBill[] = [];
+    total = 0;
 
     constructor(private modalController: ModalController,
                 private userService: UserService,
@@ -32,9 +36,11 @@ export class BillComponent implements OnInit{
 
     ngOnInit() {
         this.initForm();
+        this.users = this.userService.getUsers();
         this.userService.usersSubject.subscribe(users => {
             this.users = users;
             this.billService.changeItemList(this.items, this.users);
+            this.calculateTotal();
         })
 
     }
@@ -104,7 +110,7 @@ export class BillComponent implements OnInit{
         itemBill.itemType = 'share';
         itemBill.users = this.users;
         this.items.push(itemBill);
-
+        this.calculateTotal();
         this.form.patchValue({
             ItemName: 'Item ' + (this.items.length + 1),
             ItemPrice: '0'
@@ -124,8 +130,21 @@ export class BillComponent implements OnInit{
         return dialog;
     }
 
+    async openPaymentDialog() {
+        let dialog = await this.modalController.create({
+            component: PaymentComponent,
+            componentProps: {
+                items: this.items,
+                bill: this.bill
+            }
+        });
+        dialog.present();
+        return dialog;
+    }
+
     onRemoveItem(index: number) {
         this.items.splice(index, 1);
+        this.calculateTotal();
     }
 
     async onEditItem(index: number) {
@@ -134,8 +153,16 @@ export class BillComponent implements OnInit{
         if(data.data) {
             let updatedItem = data.data.updatedItem;
             this.items.splice(index, updatedItem);
+            this.calculateTotal();
         }
         
         console.log(data);
+    }
+
+    calculateTotal() {
+        this.total = 0;
+        this.items.forEach(item => {
+            this.total += item.price * item.quantity;
+        })
     }
 }

@@ -1,0 +1,61 @@
+<ion-header translucent>
+    <ion-toolbar>
+        <ion-title>Payment</ion-title>
+        <ion-buttons slot="start">
+            <ion-button (click)="dismissDialog()">Close</ion-button>
+        </ion-buttons>
+        <!-- <ion-buttons slot="end">
+            <ion-button (click)="onSave()">Save</ion-button>
+        </ion-buttons> -->
+    </ion-toolbar>
+</ion-header>
+<ion-content fullscreen>
+    <div class='payment'>
+        <form [formGroup]='form'>
+            <div class='item-list'>
+                <h3>Payment list</h3>
+                <div *ngFor='let p of payments; let i = index;' class='item'>
+                    <div class='col-8'>
+                        {{i+1}}. {{p.user.name}} - {{p.amount}}
+                    </div>
+                    <div class='col-2'>
+                        <ion-icon name="trash" style='margin-right: 30px; color:rgb(240, 65, 65);'
+                            (click)='onRemovePayment(i)'></ion-icon>
+                    </div>
+                </div>
+                <div *ngIf='items.length > 0' style='font-weight: 700; padding:20px 0;'>
+                    Total: {{total}}
+                </div>
+            </div>
+
+            <div>
+                <ion-item class='half-width'>
+                    <ion-label position="stacked">User</ion-label>
+                    <ion-select [value]="" okText="OK" cancelText="Dismiss" 
+                        formControlName='UserId'
+                        (ionChange)='onUserSelect($event)'>
+                        <ion-select-option *ngFor='let u of users' [value]="u.id">{{u.name}}</ion-select-option>
+                    </ion-select>
+                </ion-item>
+                <ion-item class='half-width'>
+                    <ion-label position="stacked">Item price</ion-label>
+                    <ion-input type='number' formControlName='Amount'></ion-input>
+                </ion-item>
+                <ion-button (click)='onAddPayment()' style='float: right;'>Add</ion-button>
+            </div>
+
+            <div *ngIf='payments.length > 0' style='clear: both;padding: 10px 0;'>
+                <ion-button expand='block' (click)='calculateBill()'>Calculate</ion-button>
+            </div>
+
+            <div *ngIf='transfers.length > 0'>
+                Transfers: 
+                <div *ngFor='let t of transfers; let i = index;' style='padding: 10px 0;'>
+                    {{i + 1}}. {{t.fromUser.name}} -----> {{t.toUser.name}} : {{t.amount}}
+                </div>
+            </div>
+
+        </form>
+
+    </div>
+</ion-content>
